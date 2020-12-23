@@ -15,39 +15,43 @@
 <body>
 
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a style="margin-left: 180px;" class="navbar-brand" href="/">Trang Chủ</a>
+        <a style="margin-left: 0px;" class="navbar-brand" href="/">ATN Shop</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
+        <span class="navbar-toggler-icon"></span>
+      </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link" href="/car">CARS</a>
+                    <a class="nav-link" href="/car">Product</a>
                 </li>
 
                 <li class="nav-item">
                     <a href="/view-cart/<%- listdata._id%>" class="nav-link" class="btn btn-info btn-lg">
-                        <span class="glyphicon glyphicon-shopping-cart"></span> Giỏ hàng<strong id="quantityCart" style="color: red;">  <%- listdata.cart.length %> </strong>
+                        <span class="glyphicon glyphicon-shopping-cart"></span> Order<strong id="quantityCart" style="color: red;">
+                <%- listdata.cart.length %>
+              </strong>
                     </a>
                 </li>
             </ul>
         </div>
     </nav>
     <div class="header-body">
-        <strong style="font-size: 30px">CAR</strong><br>
+        <strong style="font-size: 30px">Car</strong><br>
         <div class="header-body-view">
             <ul>
                 <% listproduct.forEach(function(Product){ %>
                     <li>
                         <div class="card" style="width: 18rem;" style="float: left;">
-                            <img class="card-img-top" src="/upload/<%- Product.imgProduct %>" alt="Card image cap">
+                            <img class="card-img-top" style="height: 200px; width: 280px;" src="/upload/<%- Product.imgProduct %>" alt="Card image cap">
                             <div class="card-body">
                                 <h5 class="card-title">
                                     <%- Product.nameProduct %>
                                 </h5>
                                 <p class="card-text">
-                                    <%- Product.priceProduct %> VND</p>
-                                <span class="btn__Product" style="margin-top: 10px;" productId="<%- Product._id %>"> <button class="btn btn-primary">Thêm vào giỏ hàng</button></span>
+                                    <%- Product.priceProduct %> VND
+                                </p>
+                                <span class="btn__Product" style="margin-top: 10px;" productId="<%- Product._id %>"> <button
+                      class="btn btn-primary">Add to cart</button></span>
                             </div>
                         </div>
                     </li>
@@ -63,7 +67,7 @@
                 const productId = value.getAttribute("productId"); // lấy attribute của btnProduct => (productId)
                 quantityCart.innerHTML = parseInt(quantityCart.innerHTML) + 1;
                 if (productId != null) {
-                    const response = await fetch("/cart" + productId + "", {
+                    const response = await fetch("/cart/" + productId + "", {
                         method: "GET",
                         credentials: "include",
                         headers: {
